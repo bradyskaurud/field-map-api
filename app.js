@@ -4,15 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
-var index = require('./routes/index');
+var fields = require('./routes/fields');
 var users = require('./routes/users');
 
 var app = express();
-
-// Database connection
-//mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_URL}`);
 
 // CORS config
 app.all('/*', function(req, res, next) {
@@ -40,8 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/fields', fields);
 app.use('/users', users);
+app.use('/', (req, res, next) => res.send('<h1>Welcome to Field Maps</h1>'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
