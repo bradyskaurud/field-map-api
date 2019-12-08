@@ -1,5 +1,3 @@
-const Model = require('../model/index');
-const {Field} = Model;
 const tj = require('togeojson');
 const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser; // node doesn't have xml parsing or a dom. use xmldom
